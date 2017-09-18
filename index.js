@@ -108,7 +108,7 @@ function csurf (options) {
     }
 
     // verify the incoming token
-    if (!ignoreMethod[req.method] && !tokens.verify(secret, value(req)) && process.env.ENV !== 'test') {
+    if (!ignoreMethod[req.method] && !tokens.verify(secret, value(req)) && !process.env.TEST_MODE) {
       return next(createError(403, 'invalid csrf token', {
         code: 'EBADCSRFTOKEN'
       }))
